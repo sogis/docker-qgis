@@ -1,0 +1,20 @@
+#!/bin/bash
+
+githash=$1
+if [ "x$githash" = "x" ]; then
+    githash='localbuild'
+fi
+
+buildident=$2
+if [ "x$buildident" = "x" ]; then
+    buildident='localbuild'
+fi
+
+build_timestamp=$(date '+%Y-%m-%d_%H:%M:%S')
+
+docker build \
+    -t sogis/qgis-server-base:3.4 \
+    --label qgis-server-base.created=$build_timestamp --label qgis-server-base.git_commit=$githash --label qgis-server-base.travis_build=$buildident \
+    .
+
+docker tag sogis/qgis-server-base:3.4 sogis/qgis-server-base:latest
