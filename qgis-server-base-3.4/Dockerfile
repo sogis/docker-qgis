@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y ttf-dejavu ttf-bitstream-vera fonts-lib
 RUN apt-get update && apt-get install -y fontconfig unzip
 
 # Additional user fonts
-ADD fonts/* /usr/share/fonts/truetype/
+COPY fonts/ /usr/share/fonts/truetype/
 
 RUN fc-cache -f && fc-list | sort
 
