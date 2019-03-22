@@ -1,0 +1,25 @@
+sudo: required
+
+language: java
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    - stable
+
+install: true
+
+script:
+  - cd qgis-server-base-3.4/
+  - image-build.sh $TRAVIS_COMMIT $TRAVIS_BUILD_NUMBER
+  - cd ..
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: ./qgis-server-base-3.4/image-push.sh $dockerRegistryUser $dockerRegistryPass
+    on:
+      branch: master
