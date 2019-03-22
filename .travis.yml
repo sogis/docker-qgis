@@ -14,7 +14,7 @@ install: true
 
 script:
   - cd qgis-server-base-3.4/
-  - image-build.sh $TRAVIS_COMMIT $TRAVIS_BUILD_NUMBER
+  - ./image-build.sh $TRAVIS_COMMIT $TRAVIS_BUILD_NUMBER
   - cd ..
 
 deploy:
