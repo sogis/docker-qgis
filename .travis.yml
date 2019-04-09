@@ -16,10 +16,18 @@ script:
   - cd qgis-server-base-3.4/
   - ./image-build.sh $TRAVIS_COMMIT $TRAVIS_BUILD_NUMBER
   - cd ..
+  - cd qgis-server-base-2.18/
+  - ./image-build.sh $TRAVIS_COMMIT $TRAVIS_BUILD_NUMBER
+  - cd ..
 
 deploy:
   - provider: script
     skip_cleanup: true
     script: ./qgis-server-base-3.4/image-push.sh $dockerRegistryUser $dockerRegistryPass
+    on:
+      branch: master
+  - provider: script
+    skip_cleanup: true
+    script: ./qgis-server-base-2.18/image-push.sh $dockerRegistryUser $dockerRegistryPass
     on:
       branch: master
