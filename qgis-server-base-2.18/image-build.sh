@@ -17,4 +17,4 @@ docker build \
     --label qgis-server-base.created=$build_timestamp --label qgis-server-base.git_commit=$githash --label qgis-server-base.travis_build=$buildident \
     .
 
-docker tag sogis/qgis-server-base:2.18 sogis/qgis-server-base:latest
+docker tag sogis/qgis-server-base:2.18 
