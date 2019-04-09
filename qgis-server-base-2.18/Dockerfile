@@ -1,6 +1,6 @@
-# QGIS Server 3.4 with Apache FCGI
+# QGIS Server 2.18 with Apache FCGI
 
-FROM phusion/baseimage:0.11
+FROM phusion/baseimage:0.10.0
 
 MAINTAINER Stefan Ziegler
 
@@ -30,7 +30,7 @@ RUN chmod +x /etc/service/xvfb/run
 RUN apt-get update && apt-get install -y apache2 libapache2-mod-fcgid
 
 #QGIS Server
-RUN echo "deb http://qgis.org/debian-ltr bionic main" > /etc/apt/sources.list.d/qgis.org-debian.list
+RUN echo "deb http://qgis.org/debian-ltr xenial main" > /etc/apt/sources.list.d/qgis.org-debian.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key CAEB3DC3BDF7FB45
 
 RUN apt-get update && apt-get install -y qgis-server python-qgis
@@ -46,17 +46,15 @@ RUN mkdir /var/log/qgis && chown www-data:www-data /var/log/qgis
 RUN mkdir /var/lib/qgis && chown www-data:www-data /var/lib/qgis
 ARG URL_PREFIX=/qgis
 ARG QGIS_SERVER_LOG_LEVEL=0
-ARG QGIS_FCGI_MIN_PROCESSES=8
-ARG QGIS_FCGI_MAX_PROCESSES=8
+#ARG QGIS_FCGI_MIN_PROCESSES=8
+#ARG QGIS_FCGI_MAX_PROCESSES=8
 ARG QGIS_FCGI_CONNECTTIMEOUT=20
 ARG QGIS_FCGI_IOTIMEOUT=90
 ADD qgis-server.conf /etc/apache2/sites-enabled/qgis-server.conf
 RUN sed -i "s!@URL_PREFIX@!$URL_PREFIX!g;\
             s!@QGIS_SERVER_LOG_LEVEL@!$QGIS_SERVER_LOG_LEVEL!g;\
             s!@QGIS_FCGI_CONNECTTIMEOUT@!$QGIS_FCGI_CONNECTTIMEOUT!g;\
-            s!@QGIS_FCGI_IOTIMEOUT@!$QGIS_FCGI_IOTIMEOUT!g;\
-            s!@QGIS_FCGI_MIN_PROCESSES@!$QGIS_FCGI_MIN_PROCESSES!g;\
-            s!@QGIS_FCGI_MAX_PROCESSES@!$QGIS_FCGI_MAX_PROCESSES!g;" \
+            s!@QGIS_FCGI_IOTIMEOUT@!$QGIS_FCGI_IOTIMEOUT!g;" \
     /etc/apache2/sites-enabled/qgis-server.conf
 RUN rm /etc/apache2/sites-enabled/000-default.conf
 
