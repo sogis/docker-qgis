@@ -45,7 +45,7 @@ RUN a2enmod headers
 RUN mkdir /var/log/qgis && chown www-data:www-data /var/log/qgis
 RUN mkdir /var/lib/qgis && chown www-data:www-data /var/lib/qgis
 ARG URL_PREFIX=/qgis
-ARG QGIS_SERVER_LOG_LEVEL=0
+ARG QGIS_SERVER_LOG_LEVEL=2
 #ARG QGIS_FCGI_MIN_PROCESSES=8
 #ARG QGIS_FCGI_MAX_PROCESSES=8
 ARG QGIS_FCGI_CONNECTTIMEOUT=20
