@@ -70,7 +70,7 @@ ADD pg_service.conf /etc/postgresql-common/
 
 EXPOSE 80
 
-VOLUME ["/data"]
+#VOLUME ["/data"]
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
