@@ -13,7 +13,8 @@ fi
 build_timestamp=$(date '+%Y-%m-%d_%H:%M:%S')
 
 docker build \
-    -t sogis/qgis-server-base:3.4 \
+    -t sogis/qgis-server-base:3.10 \
     --label qgis-server-base.created=$build_timestamp --label qgis-server-base.git_commit=$githash --label qgis-server-base.travis_build=$buildident \
     .
 
+docker tag sogis/qgis-server-base:3.10 sogis/qgis-server-base:latest
