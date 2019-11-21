@@ -1,13 +1,13 @@
 # QGIS Server 2.18 with Apache FCGI
 
-FROM phusion/baseimage:0.10.0
+FROM phusion/baseimage:0.10.2
 
 MAINTAINER Stefan Ziegler
 
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confdef" 
 
 #Fonts
 RUN apt-get update && apt-get install -y ttf-dejavu ttf-bitstream-vera fonts-liberation ttf-ubuntu-font-family
